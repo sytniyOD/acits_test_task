@@ -1,46 +1,45 @@
-# Getting Started with Create React App
+<h1 align="center">Задание для Acits</h1>
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## Описание задания
 
-## Available Scripts
+**Общая концепция и оформление**
+Реализовать на React приложение, которое умеет показывать следующие страницы:
+- /login - страница ввода логина и пароля (недоступная с авторизацией)
+- /today - страница с животными, у которых есть назначения на сегодня (недоступная без авторизации)
+- /animals - страница со всеми животными в приюте (недоступная без авторизации)
 
-In the project directory, you can run:
+На сайте в хедере реализовать ссылки:
+- Сегодня (/today)
+- Животные (/animals)
 
-### `npm start`
+**Авторизация** 
+Реализовать авторизацию. Если введены корректные данные, то из полученного с апи объекта достать токен (хранится под ключом "accessToken") и сохранить его в localStorage, затем перебрасывать на страницу /today. 
+
+Если введены другие данные, то с апи придёт ошибка, тогда нужно вывести сообщение:
+Имя пользователя или пароль введены не верно
+
+После обновления страницы авторизация сбрасываться не должна. Время жизни токена - 10 минут.
+
+В дальнейшем для всех остальных запросов на сервер использовать токен из localStorage. Отправляться он должен заголовком: Authorization: 'Bearer ' + token.
+
+**Страницы**
+На странице "Сегодня" вывести животных с назначениями на сегодня, полученных из get запроса на поинт "executions/today". Отобразить кличку животного, тип назначения (например, "Приём у врача"), породу (Кот, собака) и время назначения в формате "HH:mm".
+
+На странице "Животные" вывести всех животных из get запроса на поинт "animals". Отобразить кличку и породу животного. На странице "Животные" реализовать пагинацию, на одной подстранице отображать по 5 животных. Для пагинации необходимо отправлять get параметры "limit" и "offset", животные не должны грузиться все целиком.
+
+При нажатии на кличку животного на обеих страницах выше открывается модальное окно с карточкой животного. В карточке животного отобразить: кличка, порода, возраст, рост и вес (с единицами измерения).
+
+## Реализация
+
+Для оформления использовалась библиотека Ant-Design. 
+Состояния вынесены в Redux, а асинхронные запросы выполнены с помощью Redux-thunk.
+
+Помимо функций, которые было нужно сделать по заданию, также сделал кнопку "Выйти", которая работает только, когда пользователь авторизован. Также, реализовал автоматический выход на страницу авторизации, если истекает время жизни токена.
+
+## Чтобы запустить проект воспользуйтесь командой `npm start`
 
 Runs the app in the development mode.\
 Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 
 The page will reload if you make edits.\
 You will also see any lint errors in the console.
-
-### `npm test`
-
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
-### `npm run build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).

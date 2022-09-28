@@ -1,0 +1,9 @@
+.animals__card {
+	margin-top: 15px;
+	margin-bottom: 15px;
+	cursor: pointer;
+}
+
+.animals__pagination {
+	padding-left: 40vw;
+}

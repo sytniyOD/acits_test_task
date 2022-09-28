@@ -1,26 +1,37 @@
-import React from 'react';
-import logo from './logo.svg';
+import { Layout } from 'antd';
+import React, { useEffect } from 'react';
 import './App.css';
+import { AppRouter } from './components/AppRouter';
+import { Navbar } from './components/Navbar';
+import './App.css';
+import { useActions } from './hooks/useActions';
+import { useTypedSelector } from './hooks/useTypedSelector';
 
-function App() {
+
+export function App() {
+
+  const { setToken, setAuth, logout } = useActions();
+  const auth = localStorage.getItem('auth');
+  const error = useTypedSelector(state => state.todayReducer.error);
+
+  useEffect(() => {
+    if (auth === 'true') {
+      const token = localStorage.getItem('token') || '';
+      setToken(token);
+      setAuth(true);
+    }
+    if (error) {
+      logout()
+    }
+  }, [error]);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Layout>
+      <Navbar />
+      <Layout.Content>
+        <AppRouter />
+      </Layout.Content>
+    </Layout>
   );
 }
 
-export default App;
