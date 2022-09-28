@@ -37,9 +37,5 @@
 Помимо функций, которые было нужно сделать по заданию, также сделал кнопку "Выйти", которая работает только, когда пользователь авторизован. Также, реализовал автоматический выход на страницу авторизации, если истекает время жизни токена.
 
 ## Чтобы запустить проект воспользуйтесь командой `npm start`
+## Приложение будет доступно на [http://localhost:3000](http://localhost:3000)
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
-
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
